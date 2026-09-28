@@ -1,0 +1,38 @@
+# 监狱世界名；不存在时按下方选项自动创建
+world: prison
+# 主世界名（/prison back 传送目标）；找不到时回退服务器第一个世界
+main-world: world
+# 世界不存在时是否自动创建（false 则要求服主先用现有世界改名）
+create-world-if-missing: true
+# 监狱世界固定生成虚空（纯空气无地形，需自建平台；出生点自动铺 5x5 平台防坠落）
+# 世界出生点强制设定（每次启动生效；enabled=false 则不干预，用游戏内 /prison spawn yes 设置）
+world-spawn:
+  enabled: false
+  x: 0
+  y: 0
+  z: 0
+  yaw: 0
+  pitch: 0
+# 房间位置请在游戏内用 /prison pos <编号> 标记（管理员站在监狱世界的房间内执行）
+
+# 入狱任务（v3.14）：/prison send <玩家> <数量> 直接指定需要挖的方块数量；
+# 材质由下方 mine.breakable-material 决定（默认黑曜石）
+
+# 入狱玩家挖掘疲劳（惩罚效果）
+# enabled: 是否启用（false = 取消挖掘疲劳）；level: 效果等级（0=I级 4=V级，越高挖得越慢）
+mining-fatigue:
+  enabled: false
+  level: 2
+# 黑曜石矿场（/prison obsidian 在脚下生成）：size 边长（生成 size×size×size 黑曜石立方体，默认 15x15x15）；
+# refresh-seconds 每隔多少秒自动补满被挖掉的黑曜石（玩家周围 2 格内的缺口保留，防闷死）
+# breakable-material: 监狱世界允许囚犯破坏的方块材质（默认黑曜石；/prison send 的任务材质也由它决定）
+mine:
+  size: 15
+  refresh-seconds: 120
+  breakable-material: OBSIDIAN
+
+# 监狱参观（v4.2）：普通玩家用 /prison visit 进监狱参观；
+# 传送点由管理员站在监狱世界内执行 /prison visit pos 标记（存 visit.yml）
+# 参观者限制：不能破坏/放置方块（既有逻辑）、不能丢弃物品、protect=true 时不受玩家攻击
+visit:
+  protect: true       # 参观者在监狱世界对玩家伤害免疫（防囚犯攻击参观者）；false = 关闭

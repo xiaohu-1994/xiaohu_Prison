@@ -1,0 +1,35 @@
+name: xiaohu_Prison
+version: 1.0.0
+main: com.xiaohu.prison.PrisonPlugin   # 全限定名，写错服务端直接拒绝加载
+api-version: "26.2"                      # 本服务端（26.2-60）要求 major.minor 格式，裸 "26" 会被拒
+authors: [xiaohu]
+description: 监狱管理插件（任务制入狱/释放/房间/指令封锁/参观/持久化）
+commands:
+  prison:
+    description: 监狱管理指令（含普通玩家可用的监狱参观）
+    usage: /prison <send|release|list|pos|de|obsidian|tp|spawn|back|visit|help>
+    # v4.2：命令级权限移除（否则普通玩家无法使用 /prison visit），
+    # 改为 PrisonCommand 内逐子命令校验（visit → prison.visit，其余 → prison.admin）
+  court:
+    description: 人民法院
+    usage: /court <accuse|list|case|trial|verdict|lawyer|volunteer|watch|...|help>
+    aliases: [fy, ct]   # 法院/法庭拼音首字母（基岩版友好）
+permissions:
+  prison.admin:
+    description: 监狱管理权限（默认 OP）
+    default: op
+  prison.visit:
+    description: 监狱参观权限（默认所有玩家：/prison visit 参观、/prison visit leave 离开）
+    default: true
+  court.view:
+    description: 法院查询（默认所有玩家：list/case/history/volunteer）
+    default: true
+  court.accuse:
+    description: 起诉（默认所有玩家：/court accuse）
+    default: true
+  court.watch:
+    description: 旁听报名（默认所有玩家：/court watch）
+    default: true
+  court.judge:
+    description: 法官（开庭/宣判/驳回/公诉/位置/按钮标记；默认 OP）
+    default: op

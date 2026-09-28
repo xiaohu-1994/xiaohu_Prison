@@ -1,0 +1,20 @@
+# 人民法院设置（独立配置文件，不修改 config.yml；修改后重启生效）
+enabled: true                 # 模块总开关（false 则 /court 命令不可用）
+default-sentence: 64          # 宣判有罪未指定数量时的默认刑期（挖 N 个黑曜石）
+max-sentence: 10000           # 刑期上限（防手滑）
+accuse-cooldown-seconds: 0    # 玩家发起指控的冷却（秒）；0 = 关闭
+auto-execute: true            # 有罪宣判时被告不在线 → 重进服自动执行入狱
+
+# —— 法庭实体化（§18）——
+courtroom-enabled: true       # 法庭实体化开关（false 则退回纯聊天庭审，不传送）
+spectators-max: 20            # 观众报名上限（容量 = min(spectators-max, 已标记观众席数)）
+freeze-seats: true            # 席位定身（被告/原告/律师/观众不能移动但可转头；法官不受限）
+protect-region: true          # 法院区域保护（v4.14）：/court pos region <1|2> 标记区域后，区域内所有人（含管理员）禁破坏/放置方块
+
+# —— 法官桌按钮系统（§18.10）——
+buttons-enabled: true         # 法官桌按钮系统（false 则点击无效、悬浮字不生成）
+turn-seconds: 120             # 双方单次发言限时（秒）；0 = 关闭计时；到点只提醒不自动切换，切换由法官按钮决定
+mute-opposing: true           # 轮次禁言：轮到一方发言时，对方（含其律师）禁言；false = 不禁言
+restrict-commands: true       # 庭审指令限制：双方（含律师）庭审期间只能使用法院指令；false = 关闭
+allowed-commands: [court, fy, ct]   # 庭审白名单指令（label 匹配，可追加如 help）
+verdict-end-seconds: 5        # 判决标题展示后多少秒自动结束庭审并全员回传（默认 5；0 = 立即结束）
